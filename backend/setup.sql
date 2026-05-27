@@ -1,0 +1,74 @@
+CREATE TABLE IF NOT EXISTS `admin_users` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `username` VARCHAR(50) NOT NULL UNIQUE,
+  `password_hash` VARCHAR(255) NOT NULL,
+  `totp_secret` VARCHAR(64) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `site_content` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `section` VARCHAR(100) NOT NULL,
+  `content_key` VARCHAR(100) NOT NULL,
+  `content_value` TEXT,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY `section_key` (`section`, `content_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `site_images` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `section` VARCHAR(100) NOT NULL,
+  `image_key` VARCHAR(100) NOT NULL,
+  `image_path` VARCHAR(500) NOT NULL,
+  `alt_text` VARCHAR(255) DEFAULT '',
+  `label` VARCHAR(255) DEFAULT '',
+  `sort_order` INT DEFAULT 0,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY `idx_section` (`section`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `testimonials` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(100) NOT NULL,
+  `course` VARCHAR(100) NOT NULL,
+  `text` TEXT NOT NULL,
+  `rating` INT DEFAULT 5,
+  `sort_order` INT DEFAULT 0,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `blog_posts` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `title` VARCHAR(255) NOT NULL,
+  `excerpt` TEXT,
+  `content` TEXT,
+  `category` VARCHAR(50) DEFAULT '',
+  `read_time` VARCHAR(20) DEFAULT '',
+  `image_path` VARCHAR(500) DEFAULT '',
+  `published_at` DATE,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `universities` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `country` VARCHAR(50) NOT NULL,
+  `rank` INT NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `short_name` VARCHAR(20) NOT NULL,
+  `city` VARCHAR(100) NOT NULL,
+  `flag` VARCHAR(10) DEFAULT '',
+  `rating` DECIMAL(2,1) DEFAULT 4.5,
+  `ranking_text` VARCHAR(255) DEFAULT '',
+  `cutoff` VARCHAR(100) DEFAULT '',
+  `deadline` VARCHAR(100) DEFAULT '',
+  `fees` VARCHAR(50) DEFAULT '',
+  KEY `idx_country` (`country`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `gallery_images` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `image_path` VARCHAR(500) NOT NULL,
+  `alt_text` VARCHAR(255) DEFAULT '',
+  `sort_order` INT DEFAULT 0,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
