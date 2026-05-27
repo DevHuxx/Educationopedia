@@ -1,6 +1,3 @@
-# Welcome to your Lovable project
-
-TODO: Document your project here
 # Educationopedia 🎓
 
 > Your trusted gateway to studying MBBS abroad at globally recognized universities.
