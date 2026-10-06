@@ -1,6 +1,7 @@
 /**
  * Crafted with love by DevHux
  * Telegram: https://t.me/DevHux
+ * hi
  */
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
